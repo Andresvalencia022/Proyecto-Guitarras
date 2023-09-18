@@ -1,4 +1,5 @@
 <script setup>
+
   const props = defineProps({  //para definir y tomar la infomacion que estoy mandando en los props
     carrito:{   //Definiendo el objeto
         type: Array,  // Me  llega un array
@@ -23,7 +24,7 @@
                         <img class="img-fluid" src="/img/carrito.png" alt="imagen carrito" />
 
                         <div id="carrito" class="bg-white p-3">
-                            <!-- Condicion if -->
+                            <!-- condición if -->
                             <p v-if="carrito.length === 0" class="text-center m-0">
                                 El carrito esta vacio
                             </p>
@@ -39,13 +40,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr v-for="producto in carrito">
                                         <td>
-                                            <img class="img-fluid" src="/img/guitarra_02.jpg" alt="imagen guitarra">
+                                            <img class="img-fluid" :src="'/img/' + producto.imagen  + '.jpg'" :alt="'imagen guitarra' + producto.imagen">
                                         </td>
-                                        <td>SRV</td>
+                                        <td>{{producto.nombre}}</td>
                                         <td class="fw-bold">
-                                                $299
+                                                {{producto.precio}}
                                         </td>
                                         <td class="flex align-items-start gap-4">
                                             <button
@@ -54,7 +55,7 @@
                                             >
                                                 -
                                             </button>
-                                                1
+                                                {{producto.cantidad}}
                                             <button
                                                 type="button"
                                                 class="btn btn-dark"
