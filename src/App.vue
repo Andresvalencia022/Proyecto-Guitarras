@@ -38,12 +38,27 @@ const agregarCarrito = (guitarra) => {
     carrito.value.push(guitarra); //estoy agregando la guitarra al array de carrito
   }
 }
+
+ //Funicion de decremento e incremento
+  const disminuirCantidad = (id) => {
+      const index = carrito.value.findIndex(producto => producto.id === id)
+      if (carrito.value[index].cantidad <= 1 ) return //condición que valida si es menor o igual a 1 no  permita hacer la función de decrementar
+      carrito.value[index].cantidad--
+  }
+  const incrementoCantidad = (id) => {
+    const index = carrito.value.findIndex(producto => producto.id === id)
+    if (carrito.value[index].cantidad >= 5 ) return //Condicion que valida 1 que si es mayor a 5 no  permita hacer la función de incrementar
+    carrito.value[index].cantidad++ 
+  }
 </script>
 
 <template>
   <!-- Componente header-->
   <!-- (:carrito="carrito") le estoy mandondo el array donde tiene toda la informacion del carrito-->
-  <Header :carrito="carrito"></Header>
+  <Header :carrito="carrito" 
+           @disminuir-cantidad="disminuirCantidad"
+           @incremento-cantidad="incrementoCantidad">
+  </Header>
 
   <main class="container-xl mt-5">
     <h2 class="text-center">Nuestra Colección</h2>

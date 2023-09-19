@@ -5,7 +5,13 @@
         type: Array,  // Me  llega un array
         require: true //va a hacer obligatorio
     }
-  })
+ })
+
+//Declarar el evento que llega de App
+defineEmits(['disminuir-cantidad' , 'incremento-cantidad'])
+
+// defineEmits('incremento')
+
 </script>
 
 <template>
@@ -52,14 +58,16 @@
                                             <button
                                                 type="button"
                                                 class="btn btn-dark"
-                                            >
+                                                @click="$emit('disminuir-cantidad', producto.id)" 
+                                            > <!-- En ese evento estoy identificando el producto que quiero disminuir la cantidad, le pasamos el id -->
                                                 -
                                             </button>
                                                 {{producto.cantidad}}
                                             <button
                                                 type="button"
                                                 class="btn btn-dark"
-                                            >
+                                                @click="$emit('incremento-cantidad', producto.id)"
+                                            > <!-- En ese evento estoy identificando el producto quiero incrementar la cantidad, le pasamos el id -->
                                                 +
                                             </button>
                                         </td>
