@@ -14,7 +14,7 @@
  })
 
 //Declarar el evento que llega de App
-defineEmits(['disminuir-cantidad' , 'incremento-cantidad', 'agregar-Carrito'])
+defineEmits(['disminuir-cantidad' , 'incremento-cantidad', 'agregar-Carrito', 'eliminar-Producto','vaciar-Carrito'])
 
 const totalpagar = computed( () => { //computed toma una funcionpor el precio 
                                          //El (total) es un acumulado de la cantidad por el precio 
@@ -84,6 +84,7 @@ const totalpagar = computed( () => { //computed toma una funcionpor el precio
                                             <button
                                                 class="btn btn-danger"
                                                 type="button"
+                                                 @click="$emit('eliminar-Producto', producto.id)"
                                             >
                                                 X
                                             </button>
@@ -92,7 +93,10 @@ const totalpagar = computed( () => { //computed toma una funcionpor el precio
                                 </tbody>
                             </table>
                             <p class="text-end">Total pagar: <span class="fw-bold">${{totalpagar}}</span></p>
-                            <button class="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+                            <button class="btn btn-dark w-100 mt-3 p-2"
+                                    @click="$emit('vaciar-Carrito')"
+                                    >Vaciar Carrito
+                            </button>
                             </div>
                         </div>
                     </div>

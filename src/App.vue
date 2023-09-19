@@ -51,6 +51,17 @@ const agregarCarrito = (guitarra) => {
     if (carrito.value[index].cantidad >= 5 ) return //Condicion que valida 1 que si es mayor a 5 no  permita hacer la función de incrementar
     carrito.value[index].cantidad++ 
   }
+
+
+  const eliminarProducto = (id) => {
+    //toma todos los datos distintos al que se selecciona y elimina el id al cual se selecciona.
+    carrito.value = carrito.value.filter(producto => producto.id !== id) 
+      }
+
+  const vaciarCarrito = () => {
+      carrito.value  = []  //Mostramos el carrito vacio
+  }
+  
 </script>
 
 <template>
@@ -60,7 +71,9 @@ const agregarCarrito = (guitarra) => {
           :guitarra="guitarra"
            @disminuir-cantidad="disminuirCantidad"
            @incremento-cantidad="incrementoCantidad"
-           @agregar-Carrito="agregarCarrito">
+           @agregar-Carrito="agregarCarrito"
+           @eliminar-Producto="eliminarProducto"
+           @vaciar-Carrito="vaciarCarrito">
 
   </Header>
 
@@ -78,7 +91,6 @@ const agregarCarrito = (guitarra) => {
       </Guitarra>
     </div>
   </main>
-
   <!-- Componente footer-->
   <Footer></Footer>
 </template>
