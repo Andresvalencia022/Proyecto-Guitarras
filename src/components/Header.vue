@@ -1,4 +1,6 @@
 <script setup>
+   
+  import { computed } from 'vue' //para lógica compleja que incluye datos reactivos, se recomienda utilizar una propiedad calculada 
 
   const props = defineProps({  //para definir y tomar la infomacion que estoy mandando en los props
     carrito:{   //Definiendo el objeto
@@ -14,7 +16,10 @@
 //Declarar el evento que llega de App
 defineEmits(['disminuir-cantidad' , 'incremento-cantidad', 'agregar-Carrito'])
 
-// defineEmits('incremento')
+const totalpagar = computed( () => { //computed toma una funcionpor el precio 
+                                         //El (total) es un acumulado de la cantidad por el precio 
+      return props.carrito.reduce((total, producto) => total +(producto.cantidad * producto.precio), 0) //icnicializa en 0
+} )
 
 </script>
 
@@ -86,7 +91,7 @@ defineEmits(['disminuir-cantidad' , 'incremento-cantidad', 'agregar-Carrito'])
                                     </tr>
                                 </tbody>
                             </table>
-                            <p class="text-end">Total pagar: <span class="fw-bold">$899</span></p>
+                            <p class="text-end">Total pagar: <span class="fw-bold">${{totalpagar}}</span></p>
                             <button class="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
                             </div>
                         </div>
