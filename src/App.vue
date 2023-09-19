@@ -14,14 +14,15 @@ import Footer from "./components/footer.vue";
 // })
 
 //Ejemplo con Ref
-const guitarras = ref([]);
-
-//para agregar todo al carrito y almacenarlo
-const carrito = ref([]);
+const guitarras = ref([])
+const carrito = ref([])//para agregar todo al carrito y almacenarlo
+const guitarra = ref({})//trabajar con un objeto 
 
 onMounted(() => {
   //Conponente este listo va ejecutarce
-  guitarras.value = db; //(ref)
+  guitarras.value = db //(ref)
+  guitarra.value = db[3] //estoy accediendo al objeto que esta en la posicion 3 
+
   //state.guitarras = bd  //para (reactive) este se uliza en un opjeto relaccionado
 });
 
@@ -55,9 +56,12 @@ const agregarCarrito = (guitarra) => {
 <template>
   <!-- Componente header-->
   <!-- (:carrito="carrito") le estoy mandondo el array donde tiene toda la informacion del carrito-->
-  <Header :carrito="carrito" 
+  <Header :carrito="carrito"
+          :guitarra="guitarra"
            @disminuir-cantidad="disminuirCantidad"
-           @incremento-cantidad="incrementoCantidad">
+           @incremento-cantidad="incrementoCantidad"
+           @agregar-Carrito="agregarCarrito">
+
   </Header>
 
   <main class="container-xl mt-5">

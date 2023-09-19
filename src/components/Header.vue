@@ -4,11 +4,15 @@
     carrito:{   //Definiendo el objeto
         type: Array,  // Me  llega un array
         require: true //va a hacer obligatorio
+    },
+    guitarra:{
+        type: Object,
+        require: true
     }
  })
 
 //Declarar el evento que llega de App
-defineEmits(['disminuir-cantidad' , 'incremento-cantidad'])
+defineEmits(['disminuir-cantidad' , 'incremento-cantidad', 'agregar-Carrito'])
 
 // defineEmits('incremento')
 
@@ -92,12 +96,13 @@ defineEmits(['disminuir-cantidad' , 'incremento-cantidad'])
 
             <div class="row mt-5">
                 <div class="col-md-6 text-center text-md-start pt-5">
-                    <h1 class="display-2 fw-bold">Modelo VAI</h1>
-                    <p class="mt-5 fs-5 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, possimus quibusdam dolor nemo velit quo, fuga omnis, iure molestias optio tempore sint at ipsa dolorum odio exercitationem eos inventore odit.</p>
-                    <p class="text-primary fs-1 fw-black">$399</p>
+                    <h1 class="display-2 fw-bold">Modelo {{guitarra.nombre}}</h1>
+                    <p class="mt-5 fs-5 text-white">{{guitarra.descripcion}}</p>
+                    <p class="text-primary fs-1 fw-black">{{guitarra.precio}}</p>
                     <button 
                         type="button"
                         class="btn fs-4 bg-primary text-white py-2 px-5"
+                        @click="$emit('agregar-Carrito', guitarra)"
                     >Agregar al Carrito</button>
                 </div>
             </div>
