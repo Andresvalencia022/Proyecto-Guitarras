@@ -55,7 +55,8 @@ const totalpagar = computed( () => { //computed toma una funcionpor el precio
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="producto in carrito">
+                                    <!-- (:key="guitarra.id") el key ayuda a indetificar que el id va ser unico en la interacion v-for -->
+                                    <tr v-for="producto in carrito" :key="producto.id" >
                                         <td>
                                             <img class="img-fluid" :src="'/img/' + producto.imagen  + '.jpg'" :alt="'imagen guitarra' + producto.imagen">
                                         </td>

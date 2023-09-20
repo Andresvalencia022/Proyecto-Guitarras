@@ -104,8 +104,10 @@ const agregarCarrito = (guitarra) => {
     <div class="row mt-5">
       <!-- Renderizar para que muestre el componente -->
       <!-- (:guitarra="guitarra") estoy mandando   -->
+      <!-- (:key="guitarra.id") el key ayuda a indetificar que el id va ser unico en la interacion v-for -->
       <Guitarra
         v-for="guitarra in guitarras"
+        :key="guitarra.id" 
         :guitarra="guitarra"
         @agregar-Carrito="agregarCarrito"
       >
