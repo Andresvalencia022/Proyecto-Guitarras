@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, watch } from "vue";
 import { db } from "./data/guitarrasbd"; //Estoy importando la base de datos y la llame db
 
 // Conponente
@@ -18,13 +18,34 @@ const guitarras = ref([])
 const carrito = ref([])//para agregar todo al carrito y almacenarlo
 const guitarra = ref({})//trabajar con un objeto 
 
+//(watch) permite observar  cambios en los datos de tu aplicación Vue y ejecutar funciones personalizadas cuando se producen estos cambios.
+//el watch se va ejecutar cada vez que el carrito cambie
+watch(carrito, () => {  //esto no sirve para no colocar multiples vece el llamado de la funcion guardarLocalStorage en diferentes funciones del proyecto
+  guardarLocalStorage()
+},{
+deep: true
+})
+
 onMounted(() => {
   //Conponente este listo va ejecutarce
   guitarras.value = db //(ref)
   guitarra.value = db[3] //estoy accediendo al objeto que esta en la posicion 3 
-
   //state.guitarras = bd  //para (reactive) este se uliza en un opjeto relaccionado
+
+  const carritoStorage = localStorage.getItem('carrito') //traer el carrito que esta almacenado en el navegador como string
+  if (carritoStorage) { //si existe carritoStorage
+    carrito.value = JSON.parse(carritoStorage) //JSON.parce convierte el string carritoStorage a un array 
+  }
 });
+
+//Guardar en localStorage, esto me ayuda a que no se pierda la informacion que tengo en el carrito cada vez que recargo la pagina
+const guardarLocalStorage = () => {
+  //(localStorage.setItem) se utiliza para guardar datos en el almacenamiento local del navegador. 
+  //(JSON.stringify(carrito))se utiliza para convertir un objeto  en un  String de JSON, esto nos permitirar guardarlo a localStorage. 
+  localStorage.setItem('carrito', JSON.stringify(carrito.value))
+}
+
+
 
 //parsar a un componente la funcion para hacer el evento
 //(guitarra) - le estoy mandando un opjeto desde el evento que esta en el archivo Guitarra
